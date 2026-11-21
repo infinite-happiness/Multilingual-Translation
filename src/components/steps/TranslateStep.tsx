@@ -92,11 +92,20 @@ export function TranslateStep() {
       </div>
 
       <div>
+        <ul className="max-w-prose list-disc space-y-2 pl-5 pb-10 marker:text-(--accent)">
+          <li>
+            To translate a sentence, press the button <strong>Copy prompt</strong> and paste the prompt into your selected AI for translation.          </li>
+          <li>
+            Add the translated sentence below the original sentence, and press the <strong>Complete</strong> button when you are done translating the sentence.
+          </li>
+          <li>Click a word in the original language(s) to add it to a dictionary and glossary. The dictionaries contain all words translated into a language, whereas glossaries only contain words that belong to a translated text or folder. This way you can user the same dictionary for translating many books, and only add the words that belong to a book to its glossary.</li>
+        </ul>
+
         {paragraphs.map((paragraph, i) => (
           <Paragraph key={i} index={i + 1} total={paragraphs.length} firstSentence={starts[i] + 1} sentenceCount={paragraph.length} totalSentences={total}>
             {paragraph.map((sentence, j) => {
               // The sentence number is also the key of its translation.
-                const n = starts[i] + j + 1
+              const n = starts[i] + j + 1
               const translation = draft.translations[n]
               return (
                 <li key={j}>

@@ -29,9 +29,9 @@ export function IntroStep() {
       </section>
 
       <section className="rounded-lg border border-(--line) p-4">
-        <h3 className="-mx-4 -mt-4 mb-4 rounded-t-lg border-b border-(--line) bg-(--raised) px-4 py-2 font-medium">Sentence by sentence</h3>
+        <h3 className="-mx-4 -mt-4 mb-4 rounded-t-lg border-b border-(--line) bg-(--raised) px-4 py-2 font-medium">Sentence-by-sentence</h3>
         <p className="max-w-prose">
-          For high quality translation, the solution is to translate sentence by sentence. This way you ask AI to help you with each sentence
+          For high quality translation, the solution is to translate sentence-by-sentence. This way you ask AI to help you with each sentence
           individually, providing multiple options for difficult terms (which the software helps you with).
         </p>
       </section>
@@ -40,14 +40,14 @@ export function IntroStep() {
         <h3 className="-mx-4 -mt-4 mb-4 rounded-t-lg border-b border-(--line) bg-(--raised) px-4 py-2 font-medium">Dictionary</h3>
         <p className="max-w-prose">
           Furthermore, the software helps you create a dictionary, so that you can keep track of how words are translated throughout multiple
-          discourses/books (including grammatical rules).
+          discourses/chapters/books (including grammatical rules).
         </p>
       </section>
 
       <section className="rounded-lg border border-(--line) p-4">
         <h3 className="-mx-4 -mt-4 mb-4 rounded-t-lg border-b border-(--line) bg-(--raised) px-4 py-2 font-medium">Glossary</h3>
         <p className="max-w-prose">
-          The software even creates a glossary of the Sanskrit words added to the dictionary, which can be added to discourses or Baba's books.
+          The software even creates a glossary of selected words belonging to a discourse/chapter/book.
         </p>
       </section>
 
