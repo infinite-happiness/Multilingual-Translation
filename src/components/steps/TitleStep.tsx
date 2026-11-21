@@ -30,10 +30,9 @@ export function TitleStep() {
         <h3 className="font-medium">
           Publishing data <span className="font-normal text-(--muted)">(optional)</span>
         </h3>
-        <p className="text-sm text-(--muted)">All of these fields are optional. They are shown in the final step.</p>
         {PUBLISHING_FIELDS.map(({ key, label }) => (
           <label key={key} className="block text-sm text-(--muted)">
-            {label} (optional)
+            {label} &nbsp;
             <input
               id={`publishing-${key}`}
               value={publishing[key]}
@@ -54,7 +53,7 @@ export function TitleStep() {
       </section>
 
       <button type="button" onClick={submit} disabled={!value.trim()} className="rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-(--accent-ink) disabled:opacity-40">
-        Use this title
+        Done
       </button>
     </div>
   )

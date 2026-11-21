@@ -21,6 +21,7 @@ export function SentencesStep() {
 
       {/* Sticks to the top of the page while the (long) list scrolls underneath. */}
       <div className="sticky top-0 z-10 -mx-4 flex flex-wrap gap-2 border-b border-(--line) bg-(--surface) px-4 py-3">
+        {/*
         <button
           type="button"
           onClick={() => copy('sentences', draft.sentences)}
@@ -28,6 +29,7 @@ export function SentencesStep() {
         >
           {label('sentences', 'Copy for Google Sheet')}
         </button>
+        */}
         <button type="button" onClick={confirmSentences} className="rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-(--accent-ink)">
           Done
         </button>

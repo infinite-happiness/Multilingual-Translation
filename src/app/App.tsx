@@ -54,6 +54,7 @@ export function App() {
   const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`
 
   const summaries: Partial<Record<StepKey, string | undefined>> = {
+    intro: 'AI Optimized Multi-Lingual Translation',
     title: draft.title || undefined,
     folder: draft.folder || (draft.done.includes('folder') ? 'No folder' : undefined),
     language: draft.language ? languagesSummary(draft.language, draft.sourceLanguages) : undefined,

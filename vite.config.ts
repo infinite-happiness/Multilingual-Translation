@@ -8,7 +8,11 @@ const preview = !!process.env.PREVIEW
 
 export default defineConfig({
   // Compile-time flag so preview-only code is removed from the real build.
-  define: { __PREVIEW__: JSON.stringify(preview) },
+  define: {
+    __PREVIEW__: JSON.stringify(preview),
+    // Build date as YYYY-MM-DD in local time (the sv-SE locale formats dates that way).
+    __BUILD_DATE__: JSON.stringify(new Date().toLocaleDateString('sv-SE')),
+  },
   base: preview ? '/' : './',
   plugins: [react(), tailwindcss(), ...(preview ? [viteSingleFile()] : [])],
   server: { port: 3000 },

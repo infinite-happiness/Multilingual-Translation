@@ -38,10 +38,12 @@ export function PasteStep() {
       </section>
 
       <section className="space-y-3">
-        <h3 className="font-medium">Paste from Google Sheet</h3>
+        <h3 className="font-medium">Paste from AI or spreadsheet</h3>
         <p className="max-w-prose text-sm leading-relaxed text-(--muted)">
-          You can also let an AI split the text into sentences. Copy the prompt with the text above, give it to an AI, paste the list it returns into a
-          Google Sheet, then copy it from the sheet and paste it below.
+          If you already have the sentences in a spreadsheet, you can copy the data and paste it below.
+        </p>
+        <p className="max-w-prose text-sm leading-relaxed text-(--muted)">
+          If this tool failed to split the sentences correctly, you can also use AI with this prompt:
         </p>
         <button
           type="button"
@@ -49,11 +51,11 @@ export function PasteStep() {
           disabled={!text.trim()}
           className={secondary}
         >
-          {label('prompt', 'Use AI: copy prompt with text')}
+          {label('prompt', 'Use AI: copy this prompt into AI, and afterwards paste the results below')}
         </button>
 
         <p className="max-w-prose text-sm leading-relaxed text-(--muted)">
-          Paste one column with the original language, two columns with the original language and the translation, or up to four columns with a comment and "completed" as well. An empty row ends a paragraph.
+          You can paste one column with the original language, two columns with the original language and the translation, or up to four columns with a comment and "completed" as well. An empty row ends a paragraph.
         </p>
         <textarea
           id="sheet-text"
@@ -70,9 +72,8 @@ export function PasteStep() {
               ? 'More than four columns were pasted. Paste the original, and optionally the translation, the comment and completed.'
               : sentenceCount === 0
                 ? 'No sentences found in the pasted data.'
-                : `${sentenceCount} ${sentenceCount === 1 ? 'sentence' : 'sentences'} in ${pasted.paragraphs.length} ${
-                    pasted.paragraphs.length === 1 ? 'paragraph' : 'paragraphs'
-                  }${translationCount > 0 ? `, ${translationCount} with a translation` : ''}${commentCount > 0 ? `, ${commentCount} with a comment` : ''}${completedCount > 0 ? `, ${completedCount} completed` : ''}.`}
+                : `${sentenceCount} ${sentenceCount === 1 ? 'sentence' : 'sentences'} in ${pasted.paragraphs.length} ${pasted.paragraphs.length === 1 ? 'paragraph' : 'paragraphs'
+                }${translationCount > 0 ? `, ${translationCount} with a translation` : ''}${commentCount > 0 ? `, ${commentCount} with a comment` : ''}${completedCount > 0 ? `, ${completedCount} completed` : ''}.`}
           </p>
         )}
         <button type="button" onClick={useSheet} disabled={!sheetValid} className={primary}>
