@@ -51,9 +51,8 @@ export function LanguageStep() {
             {usedTargets.map((l) => (
               <span
                 key={l}
-                className={`inline-flex items-center overflow-hidden rounded-full border text-sm ${
-                  target === l ? 'border-(--accent) text-(--accent)' : 'border-(--line) text-(--muted)'
-                }`}
+                className={`inline-flex items-center overflow-hidden rounded-full border text-sm ${target === l ? 'border-(--accent) text-(--accent)' : 'border-(--line) text-(--muted)'
+                  }`}
               >
                 <button type="button" onClick={() => setTarget(l)} className="py-1 pr-1 pl-3 hover:text-(--text)">
                   {l}
@@ -74,7 +73,7 @@ export function LanguageStep() {
 
       <section className="space-y-3">
         <label className="block text-sm text-(--muted)" htmlFor="source-lang">
-          Source languages: the languages used in the text. Tick the ones to translate, the others are kept as they are.
+          Source languages: the languages used in the text. Tick the ones to translate, and untick the others. If you're translating from English and Sanskrit, add English and Sanskrit. If you want to translate English words and keep the Sanskrit words in Sanskrit, make sure English is ticked and Sanskrit unticked.
         </label>
         <div className="flex max-w-md gap-2">
           <input
@@ -109,9 +108,8 @@ export function LanguageStep() {
                   className="flex items-center gap-2 py-1 pr-2 pl-3 text-sm hover:bg-(--raised)"
                 >
                   <span
-                    className={`grid size-4 place-items-center rounded-sm border text-[10px] ${
-                      s.translate ? 'border-(--accent) bg-(--accent) text-(--accent-ink)' : 'border-(--muted)'
-                    }`}
+                    className={`grid size-4 place-items-center rounded-sm border text-[10px] ${s.translate ? 'border-(--accent) bg-(--accent) text-(--accent-ink)' : 'border-(--muted)'
+                      }`}
                     aria-hidden
                   >
                     {s.translate ? '✓' : ''}

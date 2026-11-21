@@ -42,16 +42,16 @@ export function Sidebar({ dictionary, onOpenDictionary, onLeaveDictionary }: Pro
     ? null
     : pending.kind === 'translation'
       ? {
-          title: `Delete “${pending.entry.title || pending.entry.language}”?`,
-          body: 'This deletes its text, sentence list, translations and comments. Dictionaries are not affected. If you may need it again, back it up first in the Backup step.',
-          confirmLabel: 'Delete translation',
-          onConfirm: () => deleteTranslation(pending.entry.id),
-        }
+        title: `Delete “${pending.entry.title || pending.entry.language}”?`,
+        body: 'This deletes its text, sentence list, translations and comments. Dictionaries are not affected. If you may need it again, back it up first in the Backup step.',
+        confirmLabel: 'Delete translation',
+        onConfirm: () => deleteTranslation(pending.entry.id),
+      }
       : folderCount > 0
         ? {
-            title: 'This folder is not empty',
-            body: `The folder “${pending.name}” still contains ${folderCount} ${folderCount === 1 ? 'translation' : 'translations'}. Delete them, or move them to another folder with their Folder step, and then the folder can be deleted.`,
-          }
+          title: 'This folder is not empty',
+          body: `The folder “${pending.name}” still contains ${folderCount} ${folderCount === 1 ? 'translation' : 'translations'}. Delete them, or move them to another folder with their Folder step, and then the folder can be deleted.`,
+        }
         : { title: `Delete the folder “${pending.name}”?`, body: 'The folder is empty. Only the folder is deleted.', confirmLabel: 'Delete folder', onConfirm: () => deleteFolder(pending.name) }
 
   // The languages are left out of a translation's row when its folder shows them for all translations.
@@ -83,7 +83,7 @@ export function Sidebar({ dictionary, onOpenDictionary, onLeaveDictionary }: Pro
 
       <nav className="min-h-0 flex-1 overflow-y-auto" aria-label="Translations">
         <h2 className="mb-2 text-sm font-medium text-(--muted)">Translations</h2>
-        {history.length === 0 && folders.length === 0 && <p className="text-sm text-(--muted)">Translations you name will appear here.</p>}
+        {history.length === 0 && folders.length === 0 && <p className="text-sm text-(--muted)">Translations will appear here.</p>}
         <ul className="space-y-1">
           {folders.map((f) => {
             const open = openFolders.includes(f)
@@ -94,28 +94,27 @@ export function Sidebar({ dictionary, onOpenDictionary, onLeaveDictionary }: Pro
             return (
               <li key={f}>
                 <div className="group relative">
-                <button
-                  type="button"
-                  onClick={() => toggleFolder(f)}
-                  aria-expanded={open}
-                  className={`flex w-full items-center gap-2 rounded-md border bg-(--bg) py-1.5 pr-8 pl-2 text-left text-sm font-medium hover:border-(--muted) ${
-                    open ? 'border-(--accent)' : 'border-(--line)'
-                  }`}
-                >
-                  <span className={`text-(--muted) transition-transform ${open ? 'rotate-90' : ''}`} aria-hidden>›</span>
-                  <svg viewBox="0 0 24 24" className={`size-4 shrink-0 ${open ? 'text-(--accent)' : 'text-(--muted)'}`} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                    {open ? (
-                      <path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" />
-                    ) : (
-                      <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                    )}
-                  </svg>
-                  <span className="min-w-0 flex-1">
-                    <span className="block break-words">{f}</span>
-                    {folderSummary && <span className="block break-words text-xs font-normal text-(--muted)">{folderSummary}</span>}
-                  </span>
-                </button>
-                {trashButton(`Delete the folder ${f}`, () => setPending({ kind: 'folder', name: f }))}
+                  <button
+                    type="button"
+                    onClick={() => toggleFolder(f)}
+                    aria-expanded={open}
+                    className={`flex w-full items-center gap-2 rounded-md border bg-(--bg) py-1.5 pr-8 pl-2 text-left text-sm font-medium hover:border-(--muted) ${open ? 'border-(--accent)' : 'border-(--line)'
+                      }`}
+                  >
+                    <span className={`text-(--muted) transition-transform ${open ? 'rotate-90' : ''}`} aria-hidden>›</span>
+                    <svg viewBox="0 0 24 24" className={`size-4 shrink-0 ${open ? 'text-(--accent)' : 'text-(--muted)'}`} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                      {open ? (
+                        <path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" />
+                      ) : (
+                        <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                      )}
+                    </svg>
+                    <span className="min-w-0 flex-1">
+                      <span className="block break-words">{f}</span>
+                      {folderSummary && <span className="block break-words text-xs font-normal text-(--muted)">{folderSummary}</span>}
+                    </span>
+                  </button>
+                  {trashButton(`Delete the folder ${f}`, () => setPending({ kind: 'folder', name: f }))}
                 </div>
                 {open && (
                   <ul className="ml-3 space-y-1 border-l border-(--line) pl-1">
@@ -143,11 +142,11 @@ export function Sidebar({ dictionary, onOpenDictionary, onLeaveDictionary }: Pro
                   aria-current={dictionary === language ? 'true' : undefined}
                   className={`flex w-full items-center gap-2 rounded-md px-2 py-1 text-left text-sm hover:bg-(--raised) ${dictionary === language ? 'bg-(--raised)' : ''}`}
                 >
-                <svg viewBox="0 0 24 24" className="size-4 shrink-0 text-(--muted)" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                  <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
-                </svg>
-                <span className="min-w-0 flex-1 truncate">{language}</span>
-                <span className="text-(--muted)">{Object.keys(dictionaries[language]?.words ?? {}).length}</span>
+                  <svg viewBox="0 0 24 24" className="size-4 shrink-0 text-(--muted)" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+                  </svg>
+                  <span className="min-w-0 flex-1 truncate">{language}</span>
+                  <span className="text-(--muted)">{Object.keys(dictionaries[language]?.words ?? {}).length}</span>
                 </button>
               </li>
             ))}

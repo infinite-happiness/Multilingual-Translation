@@ -15,7 +15,7 @@ export function TitleStep() {
     <div className="space-y-6">
       <div className="space-y-3">
         <label className="block text-sm text-(--muted)" htmlFor="title">
-          Name this translation so you can find it in the translations list
+          Name this translation, for example chapter or discourse name
         </label>
         <input
           id="title"

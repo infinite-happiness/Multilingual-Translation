@@ -11,7 +11,7 @@ export function FolderStep() {
   return (
     <div className="space-y-3">
       <label className="block text-sm text-(--muted)" htmlFor="folder">
-        Create a new folder, pick an existing one, or skip
+        A folder is for example the book name if you're translating a chapter or discourse. Create a new folder, click an existing one, or click No folder.
       </label>
       <div className="flex max-w-md gap-2">
         <input

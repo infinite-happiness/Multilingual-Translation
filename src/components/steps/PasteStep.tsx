@@ -31,6 +31,9 @@ export function PasteStep() {
         <label htmlFor="text" className="block font-medium">
           Paste normal text
         </label>
+        <p className="max-w-prose leading-relaxed text-(--muted)">
+          If you're starting a new translation, paste the text here.
+        </p>
         <textarea id="text" value={text} onChange={(e) => setText(e.target.value)} rows={4} className={field} />
         <button type="button" onClick={() => confirmText(text)} disabled={!text.trim()} className={primary}>
           Use this text

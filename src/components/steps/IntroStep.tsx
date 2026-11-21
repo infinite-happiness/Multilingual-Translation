@@ -57,7 +57,7 @@ export function IntroStep() {
       </section>
 
       <button type="button" onClick={confirmIntro} className="rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-(--accent-ink)">
-        Continue
+        Start translating
       </button>
     </div>
   )
