@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/* Dark is the default palette; the .light class on <html> swaps the tokens. */
+:root {
+  --bg: #12141c;
+  --surface: #1a1d28;
+  --raised: #232736;
+  --line: #2d3245;
+  --text: #e4e3dd;
+  --muted: #8c90a3;
+  --accent: #e0a23b;
+  --accent-ink: #1a1405;
+  /* Word colors: one per language, and blue for translations. */
+  --tone-yellow: #e8c547;
+  --tone-orange: #f0883e;
+  --tone-green: #5fcf80;
+  --tone-pink: #f07db8;
+  --tone-purple: #b497f0;
+  --tone-red: #ef6b6b;
+  --tone-teal: #4cc9c0;
+  --blue: #6cb0f6;
+  color-scheme: dark;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+:root.light {
+  --bg: #eef0f5;
+  --surface: #ffffff;
+  --raised: #e6e9f0;
+  --line: #d3d8e3;
+  --text: #1c2030;
+  --muted: #62687d;
+  --accent: #b9740c;
+  --accent-ink: #ffffff;
+  --tone-yellow: #8f6b00;
+  --tone-orange: #b8520a;
+  --tone-green: #1d7a3d;
+  --tone-pink: #b8327a;
+  --tone-purple: #6d46c4;
+  --tone-red: #c22f2f;
+  --tone-teal: #0f7c76;
+  --blue: #1d62b8;
+  color-scheme: light;
+}
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
