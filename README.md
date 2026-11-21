@@ -12,15 +12,15 @@ If you translate a whole chapter or discourse at once with AI in 2026, these pro
 
 ## Sentence by sentence
 
-For high quality translation, the solution is to translate sentence by sentence. This way you ask AI to help you with each sentence individually, providing multiple options for difficult terms (which the software helps you with).
+For high quality translation, the solution is to translate sentence by sentence. This way you ask AI to help you with each sentence individually, providing multiple options for difficult terms.
 
 ## Dictionary
 
-Furthermore, the software helps you create a dictionary, so that you can keep track of how words are translated throughout multiple discourses/books (including grammatical rules).
+Furthermore, the software helps you create a dictionary, so that you can keep track of how words are translated throughout multiple discourses/chapters/books (including grammatical rules).
 
 ## Glossary
 
-The software even creates a glossary of the Sanskrit words added to the dictionary, which can be added to discourses or Baba's books.
+The software even creates a glossary of selected words belonging to a discourse/chapter/book.
 
 ## Backups
 
