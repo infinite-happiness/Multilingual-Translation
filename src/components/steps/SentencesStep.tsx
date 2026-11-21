@@ -1,6 +1,7 @@
 import { useStore } from '../../store/useStore'
-import { paragraphStarts, parseSentences } from '../../features/translation/sentences'
+import { nextSentenceToTranslate, paragraphStarts, parseSentences } from '../../features/translation/sentences'
 import { useCopy } from '../../lib/useCopy'
+import { focusTranslation, scrollIntoView } from '../../lib/scroll'
 import { Paragraph } from '../sentences/Paragraph'
 import { Sentence } from '../sentences/Sentence'
 
@@ -11,6 +12,21 @@ export function SentencesStep() {
   const paragraphs = parseSentences(draft.sentences)
   const starts = paragraphStarts(paragraphs)
   const count = paragraphs.reduce((total, paragraph) => total + paragraph.length, 0)
+
+  // Finishing the step opens the translation step; once that is rendered, go where "Continue translating" would go.
+  const finish = () => {
+    confirmSentences()
+    requestAnimationFrame(() => {
+      const next = nextSentenceToTranslate(draft.translations, count)
+      if (next) {
+        focusTranslation(next)
+        return
+      }
+      // Every sentence is already completed: show the top of the translation step instead.
+      const card = document.getElementById('translate-step')?.closest('section')
+      if (card) scrollIntoView(card, 'start')
+    })
+  }
 
   return (
     <div className="space-y-4">
@@ -30,8 +46,8 @@ export function SentencesStep() {
           {label('sentences', 'Copy for Google Sheet')}
         </button>
         */}
-        <button type="button" onClick={confirmSentences} className="rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-(--accent-ink)">
-          Done
+        <button type="button" onClick={finish} className="rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-(--accent-ink)">
+          Done - Sentences look correct
         </button>
       </div>
 
@@ -46,6 +62,9 @@ export function SentencesStep() {
           </Paragraph>
         ))}
       </div>
+      <button type="button" onClick={finish} className="rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-(--accent-ink)">
+        Done - Sentences look correct
+      </button>
     </div>
   )
 }

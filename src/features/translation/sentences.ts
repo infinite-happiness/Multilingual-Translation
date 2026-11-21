@@ -42,3 +42,12 @@ export function paragraphStarts(paragraphs: string[][]): number[] {
     return start
   })
 }
+
+/**
+ * The number of the sentence to work on next: the first one without any translation text, and once every
+ * sentence has text, the first one that is not completed yet. Undefined when every sentence is completed.
+ */
+export function nextSentenceToTranslate(translations: Record<number, { text: string; completed: boolean }>, total: number): number | undefined {
+  const numbers = Array.from({ length: total }, (_, i) => i + 1)
+  return numbers.find((n) => !translations[n]?.text.trim()) ?? numbers.find((n) => !translations[n]?.completed)
+}

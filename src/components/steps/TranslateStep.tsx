@@ -1,11 +1,11 @@
 import { useMemo, useRef, useState } from 'react'
 import { useStore } from '../../store/useStore'
-import { paragraphStarts, parseSentences } from '../../features/translation/sentences'
+import { nextSentenceToTranslate, paragraphStarts, parseSentences } from '../../features/translation/sentences'
 import { sentencePrompt } from '../../features/translation/prompts'
 import { languageTones } from '../../features/dictionary/tones'
 import { wordKey } from '../../features/dictionary/types'
 import { copyText } from '../../lib/clipboard'
-import { scrollIntoView } from '../../lib/scroll'
+import { focusTranslation, scrollIntoView } from '../../lib/scroll'
 import { Paragraph } from '../sentences/Paragraph'
 import { Sentence } from '../sentences/Sentence'
 import { WordDialog } from '../dictionary/WordDialog'
@@ -42,15 +42,9 @@ export function TranslateStep() {
     window.setTimeout(() => setCopied(null), 2000)
   }
 
-  // The next sentence without any translation text; once every sentence has text, the next one that is not completed yet.
-  const numbers = Array.from({ length: total }, (_, i) => i + 1)
-  const nextToTranslate =
-    numbers.find((n) => !draft.translations[n]?.text.trim()) ?? numbers.find((n) => !draft.translations[n]?.completed)
+  const nextToTranslate = nextSentenceToTranslate(draft.translations, total)
   const continueTranslating = () => {
-    const field = nextToTranslate && document.getElementById(`translation-${nextToTranslate}`)
-    if (!field) return
-    field.focus({ preventScroll: true })
-    scrollIntoView(field, 'center')
+    if (nextToTranslate) focusTranslation(nextToTranslate)
   }
 
   // The step card that wraps this step, used as the "top" of the long list.
@@ -69,7 +63,7 @@ export function TranslateStep() {
   const secondary = 'rounded-md border border-(--line) px-4 py-2 text-sm hover:border-(--muted)'
 
   return (
-    <div ref={root} className="space-y-4">
+    <div ref={root} id="translate-step" className="space-y-4">
       <p className="text-sm text-(--muted)">
         {completed} of {total} {total === 1 ? 'sentence' : 'sentences'} completed.
       </p>
