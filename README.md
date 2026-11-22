@@ -1,3 +1,5 @@
+Try this software: https://infinite-happiness.github.io/Multilingual-Translation/
+
 # AI Optimized Multi-Lingual Translation
 
 AI can certainly be used for translation, but at the same time there are some pitfalls to avoid, in order to make the translations high quality,
