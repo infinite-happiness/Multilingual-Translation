@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from 'react'
 import { useStore } from '../store/useStore'
 import { STEPS, type StepKey } from '../features/translation/steps'
 import { Sidebar } from '../components/sidebar/Sidebar'
+import { Footer } from '../components/Footer'
 import { DictionaryView } from '../components/dictionary/DictionaryView'
 import { StepCard } from '../components/steps/StepCard'
 import { IntroStep } from '../components/steps/IntroStep'
@@ -95,6 +96,7 @@ export function App() {
             ))}
           </div>
         )}
+        <Footer />
       </main>
     </div>
   )

@@ -20,12 +20,14 @@ export function focusOpenStep() {
   requestAnimationFrame(() => {
     const card = document.querySelector<HTMLElement>('[data-step-open]')
     if (!card) return
-    scrollIntoView(card, 'start')
     const field = card.querySelector<HTMLInputElement | HTMLTextAreaElement>(
       'input:not([type=checkbox], [type=radio], [type=hidden], [disabled]), textarea:not([disabled], [readonly])',
     )
-    if (!field) return
-    field.focus({ preventScroll: true })
-    field.setSelectionRange(field.value.length, field.value.length)
+    // Focus first and scroll last: placing the cursor can scroll the page to reveal the field, and the top of the card has to win.
+    if (field) {
+      field.focus({ preventScroll: true })
+      field.setSelectionRange(field.value.length, field.value.length)
+    }
+    scrollIntoView(card, 'start')
   })
 }
