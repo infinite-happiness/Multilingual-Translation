@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useStore } from '../../store/useStore'
 import { PUBLISHING_FIELDS, type Publishing } from '../../features/translation/publishing'
+import { focusOpenStep } from '../../lib/scroll'
 
 const field = 'w-full max-w-md rounded-md border border-(--line) bg-(--bg) px-3 py-2 outline-none focus:border-(--accent)'
 
@@ -9,7 +10,11 @@ export function TitleStep() {
   const [value, setValue] = useState(draft.title)
   const [publishing, setPublishing] = useState<Publishing>(draft.publishing)
   const [useFolder, setUseFolder] = useState(draft.useFolderPublishing)
-  const submit = () => value.trim() && confirmTitle(value.trim(), publishing, useFolder)
+  const submit = () => {
+    if (!value.trim()) return
+    confirmTitle(value.trim(), publishing, useFolder)
+    focusOpenStep()
+  }
 
   return (
     <div className="space-y-6">

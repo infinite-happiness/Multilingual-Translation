@@ -5,7 +5,7 @@ import { sentencePrompt } from '../../features/translation/prompts'
 import { languageTones } from '../../features/dictionary/tones'
 import { wordKey } from '../../features/dictionary/types'
 import { copyText } from '../../lib/clipboard'
-import { focusTranslation, scrollIntoView } from '../../lib/scroll'
+import { focusOpenStep, focusTranslation, scrollIntoView } from '../../lib/scroll'
 import { Paragraph } from '../sentences/Paragraph'
 import { Sentence } from '../sentences/Sentence'
 import { WordDialog } from '../dictionary/WordDialog'
@@ -46,6 +46,10 @@ export function TranslateStep() {
   const continueTranslating = () => {
     if (nextToTranslate) focusTranslation(nextToTranslate)
   }
+  const finish = () => {
+    confirmTranslate()
+    focusOpenStep()
+  }
 
   // The step card that wraps this step, used as the "top" of the long list.
   const card = () => root.current?.closest('section')
@@ -72,7 +76,7 @@ export function TranslateStep() {
       <div className="sticky top-0 z-10 -mx-4 flex flex-wrap gap-2 border-b border-(--line) bg-(--surface) px-4 py-3">
         {/* Once every sentence is completed, finishing the step takes the place of continuing. */}
         {allCompleted ? (
-          <button type="button" onClick={confirmTranslate} className="rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-(--accent-ink)">
+          <button type="button" onClick={finish} className="rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-(--accent-ink)">
             Translation finished
           </button>
         ) : (

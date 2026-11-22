@@ -1,7 +1,13 @@
 import { useStore } from '../../store/useStore'
+import { focusOpenStep } from '../../lib/scroll'
 
 export function IntroStep() {
   const confirmIntro = useStore((s) => s.confirmIntro)
+
+  const start = () => {
+    confirmIntro()
+    focusOpenStep()
+  }
 
   return (
     <div className="space-y-4">
@@ -17,14 +23,17 @@ export function IntroStep() {
         <p className="mb-3 max-w-prose">If you translate a whole chapter or discourse at once with AI in 2026, these problems are likely to occur:</p>
         <ul className="max-w-prose list-disc space-y-2 pl-5 marker:text-(--accent)">
           <li>
-            the same word may not be translated the same way throughout the chapter/discourse, and even if it is, it may not be translated the same
-            way in the next chapter/discourse
+            in general, you can't expect the translation to be acceptable quality by itself;
           </li>
           <li>
-            when translating a word it's not only about finding the right word, but may also include grammatical rules, for example if a Sanskrit
-            word needs a gender (or den/det in Swedish) in the translated language, AI may not be consistent about the gender
+            the same word may not be translated the same way throughout the chapter/discourse, and even if it is, it may not be translated the same
+            way in the next chapter/discourse;
           </li>
-          <li>in a bad case AI may even forget sentences, leaving them out completely</li>
+          <li>
+            when translating a word it's not only about finding the right word, but also about grammatical rules, for example if a Sanskrit
+            word needs a gender (or den/det in Swedish) in the translated language, AI may not be consistent about the gender;
+          </li>
+          <li>in a bad case AI may even forget sentences, leaving some out completely.</li>
         </ul>
       </section>
 
@@ -32,14 +41,14 @@ export function IntroStep() {
         <h3 className="-mx-4 -mt-4 mb-4 rounded-t-lg border-b border-(--line) bg-(--raised) px-4 py-2 font-medium">Sentence-by-sentence</h3>
         <p className="max-w-prose">
           For high quality translation, the solution is to translate sentence-by-sentence. This way you ask AI to help you with each sentence
-          individually, providing multiple options for difficult terms (which the software helps you with).
+          individually, providing multiple options for difficult terms.
         </p>
       </section>
 
       <section className="rounded-lg border border-(--line) p-4">
         <h3 className="-mx-4 -mt-4 mb-4 rounded-t-lg border-b border-(--line) bg-(--raised) px-4 py-2 font-medium">Dictionary</h3>
         <p className="max-w-prose">
-          Furthermore, the software helps you create a dictionary, so that you can keep track of how words are translated throughout multiple
+          Furthermore, this software helps you create a dictionary, so that you can keep track of how words are translated throughout multiple
           discourses/chapters/books (including grammatical rules).
         </p>
       </section>
@@ -47,16 +56,21 @@ export function IntroStep() {
       <section className="rounded-lg border border-(--line) p-4">
         <h3 className="-mx-4 -mt-4 mb-4 rounded-t-lg border-b border-(--line) bg-(--raised) px-4 py-2 font-medium">Glossary</h3>
         <p className="max-w-prose">
-          The software even creates a glossary of selected words belonging to a discourse/chapter/book.
+          This software even creates a glossary of selected words belonging to a discourse/chapter/book.
         </p>
       </section>
 
       <section className="rounded-lg border border-(--line) p-4">
         <h3 className="-mx-4 -mt-4 mb-4 rounded-t-lg border-b border-(--line) bg-(--raised) px-4 py-2 font-medium">Backups</h3>
-        <p className="max-w-prose">The software also helps with backups, since one should always keep multiple backups of important work.</p>
+        <p className="max-w-prose">This software also helps with backups, since one should always keep multiple backups of important work.</p>
       </section>
 
-      <button type="button" onClick={confirmIntro} className="rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-(--accent-ink)">
+      <section className="rounded-lg border border-(--line) p-4">
+        <h3 className="-mx-4 -mt-4 mb-4 rounded-t-lg border-b border-(--line) bg-(--raised) px-4 py-2 font-medium">Audiobooks</h3>
+        <p className="max-w-prose">In 2026 you can create audiobooks for free in many languages. This software helps you with that.</p>
+      </section>
+
+      <button type="button" onClick={start} className="rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-(--accent-ink)">
         Start translating
       </button>
     </div>

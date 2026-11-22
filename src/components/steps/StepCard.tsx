@@ -14,7 +14,7 @@ interface Props {
 export function StepCard({ n, title, status, open, summary, onToggle, children }: Props) {
   const locked = status === 'locked' || status === 'unbuilt'
   return (
-    <section className="rounded-lg border border-(--line) bg-(--surface)">
+    <section data-step-open={open && !locked ? '' : undefined} className="rounded-lg border border-(--line) bg-(--surface)">
       <button
         type="button"
         onClick={onToggle}

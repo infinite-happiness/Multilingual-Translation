@@ -1,17 +1,23 @@
 import { useState } from 'react'
 import { useStore } from '../../store/useStore'
+import { focusOpenStep } from '../../lib/scroll'
 
 export function FolderStep() {
   const { folders, draft, confirmFolder } = useStore()
   const [value, setValue] = useState('')
-  const create = () => value.trim() && confirmFolder(value.trim())
+  // Completes the step with the chosen folder (an empty name means no folder), then moves on to the step that opens next.
+  const choose = (name: string) => {
+    confirmFolder(name)
+    focusOpenStep()
+  }
+  const create = () => value.trim() && choose(value.trim())
   const chip = (active: boolean) =>
     `rounded-full border px-3 py-1 text-sm ${active ? 'border-(--accent) text-(--accent)' : 'border-(--line) text-(--muted) hover:text-(--text)'}`
 
   return (
     <div className="space-y-3">
       <label className="block text-sm text-(--muted)" htmlFor="folder">
-        A folder is for example the book name if you're translating a chapter or discourse. Create a new folder, click an existing one, or click No folder.
+        A folder is for example the book name if you're translating a chapter or discourse. Create a new folder, click an existing one, or click <strong>No folder</strong>.
       </label>
       <div className="flex max-w-md gap-2">
         <input
@@ -27,12 +33,12 @@ export function FolderStep() {
       </div>
       <div className="flex flex-wrap gap-2">
         {folders.map((f) => (
-          <button key={f} type="button" onClick={() => confirmFolder(f)} className={chip(draft.folder === f)}>
+          <button key={f} type="button" onClick={() => choose(f)} className={chip(draft.folder === f)}>
             {f}
           </button>
         ))}
         {/* "No folder" only counts as chosen once this step has been completed. */}
-        <button type="button" onClick={() => confirmFolder('')} className={chip(draft.done.includes('folder') && !draft.folder)}>
+        <button type="button" onClick={() => choose('')} className={chip(draft.done.includes('folder') && !draft.folder)}>
           No folder
         </button>
       </div>

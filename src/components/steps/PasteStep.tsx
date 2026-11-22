@@ -4,6 +4,7 @@ import { splitPromptWithText } from '../../features/translation/prompts'
 import { formatParagraphs } from '../../features/translation/sentences'
 import { parseSheetPaste } from '../../features/translation/sheetPaste'
 import { useCopy } from '../../lib/useCopy'
+import { focusOpenStep } from '../../lib/scroll'
 
 const field = 'w-full rounded-md border border-(--line) bg-(--bg) px-3 py-2 leading-relaxed outline-none focus:border-(--accent)'
 const primary = 'rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-(--accent-ink) disabled:opacity-40'
@@ -22,8 +23,14 @@ export function PasteStep() {
   const completedCount = Object.values(pasted.translations).filter((t) => t.completed).length
   const sheetValid = sentenceCount > 0 && pasted.columns <= 4
 
-  const useSheet = () =>
+  const useText = () => {
+    confirmText(text)
+    focusOpenStep()
+  }
+  const useSheet = () => {
     confirmSheet(pasted.paragraphs.map((paragraph) => paragraph.join('\n')).join('\n\n'), formatParagraphs(pasted.paragraphs), pasted.translations)
+    focusOpenStep()
+  }
 
   return (
     <div className="space-y-8">
@@ -35,7 +42,7 @@ export function PasteStep() {
           If you're starting a new translation, paste the text here.
         </p>
         <textarea id="text" value={text} onChange={(e) => setText(e.target.value)} rows={4} className={field} />
-        <button type="button" onClick={() => confirmText(text)} disabled={!text.trim()} className={primary}>
+        <button type="button" onClick={useText} disabled={!text.trim()} className={primary}>
           Use this text
         </button>
       </section>

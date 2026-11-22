@@ -1,11 +1,17 @@
 import { useStore } from '../../store/useStore'
 import { errorCheckPrompt, numberedTranslations } from '../../features/translation/prompts'
 import { useCopy } from '../../lib/useCopy'
+import { focusOpenStep } from '../../lib/scroll'
 
 export function ErrorCheckStep() {
   const { draft, confirmErrors } = useStore()
   const { copy, label } = useCopy<'prompt'>()
   const lines = numberedTranslations(draft.translations)
+
+  const done = () => {
+    confirmErrors()
+    focusOpenStep()
+  }
 
   return (
     <div className="space-y-4">
@@ -25,7 +31,7 @@ export function ErrorCheckStep() {
         >
           {label('prompt', 'Copy prompt with translation')}
         </button>
-        <button type="button" onClick={confirmErrors} className="rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-(--accent-ink)">
+        <button type="button" onClick={done} className="rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-(--accent-ink)">
           Done
         </button>
       </div>

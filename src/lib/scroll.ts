@@ -11,3 +11,21 @@ export function focusTranslation(n: number) {
   field.focus({ preventScroll: true })
   scrollIntoView(field, 'center')
 }
+
+/**
+ * Call right after a step was completed: once the step that opened next has rendered, scrolls it to the top of
+ * the view and focuses its first text field, with the cursor at the end of any text in it.
+ */
+export function focusOpenStep() {
+  requestAnimationFrame(() => {
+    const card = document.querySelector<HTMLElement>('[data-step-open]')
+    if (!card) return
+    scrollIntoView(card, 'start')
+    const field = card.querySelector<HTMLInputElement | HTMLTextAreaElement>(
+      'input:not([type=checkbox], [type=radio], [type=hidden], [disabled]), textarea:not([disabled], [readonly])',
+    )
+    if (!field) return
+    field.focus({ preventScroll: true })
+    field.setSelectionRange(field.value.length, field.value.length)
+  })
+}

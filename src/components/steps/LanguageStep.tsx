@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useStore, type SourceLanguage } from '../../store/useStore'
 import { knownSourceLanguages, sameLanguage, translationsUsing, usedLanguages } from '../../features/translation/languages'
 import { ConfirmDialog } from '../ConfirmDialog'
+import { focusOpenStep } from '../../lib/scroll'
 
 const field = 'w-full max-w-md rounded-md border border-(--line) bg-(--bg) px-3 py-2 outline-none focus:border-(--accent)'
 
@@ -35,6 +36,11 @@ export function LanguageStep() {
     else removeLanguage(language)
   }
   const blockedBy = blocked ? translationsUsing(history, blocked) : []
+
+  const done = () => {
+    confirmLanguages(target.trim(), sources, useFolder)
+    focusOpenStep()
+  }
 
   const chip = (active: boolean) =>
     `rounded-full border px-3 py-1 text-sm ${active ? 'border-(--accent) text-(--accent)' : 'border-(--line) text-(--muted) hover:text-(--text)'}`
@@ -165,7 +171,7 @@ export function LanguageStep() {
         <button
           type="button"
           disabled={!target.trim()}
-          onClick={() => confirmLanguages(target.trim(), sources, useFolder)}
+          onClick={done}
           className="rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-(--accent-ink) disabled:opacity-40"
         >
           Done
