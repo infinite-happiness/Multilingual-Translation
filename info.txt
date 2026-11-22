@@ -1,4 +1,9 @@
 pnpm install
+
+run.ps1
+
+or:
+
 pnpm dev
 pnpm build
 pnpm preview

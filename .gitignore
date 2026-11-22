@@ -5,7 +5,7 @@ node_modules/
 dist/
 dist-ssr/
 
-# Local clone of the deploy branch (GitHub Pages), written by deploy.ps1
+# Local clone of the deploy branch (GitHub Pages), written by run.ps1
 /deploy/
 
 # Original project archive (project root only)

@@ -1,4 +1,4 @@
-# deploy.ps1
+# run.ps1
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
 
@@ -6,6 +6,58 @@ Write-Host "========================================================" -Foregroun
 Write-Host "              Infinite Happiness Deployment" -ForegroundColor Cyan
 Write-Host "========================================================" -ForegroundColor Cyan
 Write-Host ""
+
+# 0. Choose what to run: only the dev server, or the full deploy.
+
+# Shows a menu that is navigated with the up/down arrow keys and confirmed with Enter.
+# Returns the index of the chosen option, or -1 when Escape is pressed.
+function Select-Option {
+    param([string[]]$Options)
+
+    $selected = 0
+    $width = [Console]::WindowWidth - 1
+    [Console]::CursorVisible = $false
+    try {
+        while ($true) {
+            for ($i = 0; $i -lt $Options.Count; $i++) {
+                if ($i -eq $selected) {
+                    Write-Host ("  > " + $Options[$i]).PadRight($width) -ForegroundColor Black -BackgroundColor Cyan
+                } else {
+                    Write-Host ("    " + $Options[$i]).PadRight($width)
+                }
+            }
+            # Measured after drawing, so it stays correct when drawing made the window scroll.
+            $top = [Console]::CursorTop - $Options.Count
+
+            $key = [Console]::ReadKey($true)
+            if ($key.Key -eq "UpArrow") {
+                $selected = ($selected - 1 + $Options.Count) % $Options.Count
+            } elseif ($key.Key -eq "DownArrow") {
+                $selected = ($selected + 1) % $Options.Count
+            } elseif ($key.Key -eq "Enter") {
+                return $selected
+            } elseif ($key.Key -eq "Escape") {
+                return -1
+            }
+            [Console]::SetCursorPosition(0, $top)
+        }
+    } finally {
+        [Console]::CursorVisible = $true
+    }
+}
+
+Write-Host "What do you want to do? (up/down arrows to choose, Enter to confirm, Esc to cancel)"
+$mode = Select-Option @("Run the dev server (http://localhost:3000)", "Deploy to GitHub Pages", "Cancel")
+Write-Host ""
+
+if ($mode -eq 0) {
+    Write-Host "Starting the dev server at http://localhost:3000 (Ctrl+C to stop)..." -ForegroundColor Cyan
+    pnpm dev
+    exit $LASTEXITCODE
+} elseif ($mode -ne 1) {
+    Write-Host "Cancelled." -ForegroundColor Yellow
+    exit 0
+}
 
 # 1. Use today's date (local time) as the release label, matching the build date shown in the app.
 $releaseDate = Get-Date -Format "yyyy-MM-dd"
