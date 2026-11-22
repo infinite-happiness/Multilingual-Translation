@@ -6,9 +6,9 @@ AI can certainly be used for translation, but at the same time there are some pi
 
 If you translate a whole chapter or discourse at once with AI in 2026, these problems are likely to occur:
 
-- the same word may not be translated the same way throughout the chapter/discourse, and even if it is, it may not be translated the same way in the next chapter/discourse
-- when translating a word it's not only about finding the right word, but may also include grammatical rules, for example if a Sanskrit word needs a gender (or den/det in Swedish) in the translated language, AI may not be consistent about the gender
-- in a bad case AI may even forget sentences, leaving them out completely
+- the same word may not be translated the same way throughout the chapter/discourse, and even if it is, it may not be translated the same way in the next chapter/discourse;
+- when translating a word it's not only about finding the right word, but also about grammatical rules, for example if a Sanskrit word needs a gender (or den/det in Swedish) in the translated language, AI may not be consistent about the gender;
+- in a bad case AI may even forget sentences, leaving them out completely.
 
 ## Sentence by sentence
 
