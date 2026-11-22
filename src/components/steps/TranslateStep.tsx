@@ -50,6 +50,12 @@ export function TranslateStep() {
     confirmTranslate()
     focusOpenStep()
   }
+  // Shown in the sticky bar, and again under the last sentence, once every sentence is completed.
+  const finishButton = (
+    <button type="button" onClick={finish} className="rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-(--accent-ink)">
+      Done - Translation Complete
+    </button>
+  )
 
   // The step card that wraps this step, used as the "top" of the long list.
   const card = () => root.current?.closest('section')
@@ -76,9 +82,7 @@ export function TranslateStep() {
       <div className="sticky top-0 z-10 -mx-4 flex flex-wrap gap-2 border-b border-(--line) bg-(--surface) px-4 py-3">
         {/* Once every sentence is completed, finishing the step takes the place of continuing. */}
         {allCompleted ? (
-          <button type="button" onClick={finish} className="rounded-md bg-(--accent) px-4 py-2 text-sm font-medium text-(--accent-ink)">
-            Translation finished
-          </button>
+          finishButton
         ) : (
           <button type="button" onClick={continueTranslating} disabled={!nextToTranslate} className={`${secondary} disabled:opacity-40`}>
             Continue translating
@@ -136,6 +140,8 @@ export function TranslateStep() {
           </Paragraph>
         ))}
       </div>
+
+      {allCompleted && finishButton}
 
       {/* The end of the list, which "Go to bottom" scrolls to. */}
       <div ref={bottom} />
