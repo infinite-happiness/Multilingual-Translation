@@ -16,12 +16,15 @@ For high quality translation, the solution is to translate sentence by sentence.
 
 ## Dictionary
 
-Furthermore, the software helps you create a dictionary, so that you can keep track of how words are translated throughout multiple discourses/chapters/books (including grammatical rules).
+Furthermore, this software helps you create a dictionary, so that you can keep track of how words are translated throughout multiple discourses/chapters/books (including grammatical rules).
 
 ## Glossary
 
-The software even creates a glossary of selected words belonging to a discourse/chapter/book.
+This software even creates a glossary of selected words belonging to a discourse/chapter/book.
 
 ## Backups
 
-The software also helps with backups, since one should always keep multiple backups of important work.
+This software also helps with backups, since one should always keep multiple backups of important work.
+
+## Audiobooks
+In 2026 you can create audiobooks for free in many languages. This software helps you with that.
